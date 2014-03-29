@@ -1,0 +1,30 @@
+// setting the font size
+$base-font-size: 16 !default;
+
+// Get the int value from a string (example 12px -> 12)
+@function strip-units($number) {
+	@return $number / ($number * 0 + 1);
+}
+
+// Main function
+@function px-to-rem($values){
+	$rem: "";
+	
+	//making the array
+	$values: zip($values);
+	
+	// reading all elements inside the array with values
+	@for $i from 1 through length($values){
+		
+		$size: nth($values, $i);
+		$size: nth($size, 1);
+		
+		// checking if the unit is px
+		@if unit($size) == "px"{
+			$size: strip-units($size);
+			$rem: $rem + ' ' + ($size/$base-font-size) + rem;
+		}
+	}
+	
+	@return unquote($rem);
+}

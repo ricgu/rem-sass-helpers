@@ -1,0 +1,46 @@
+// setting the font size
+$base-font-size: 16 !default;
+
+// Get the int value from a string (example 12px -> 12)
+@function strip-units($number) {
+	@return $number / ($number * 0 + 1);
+}
+
+// Main function
+@mixin make-property($property, $property-values){
+	
+	// init px and rem vars
+	$px: "";
+	$rem: "";
+	
+	//making the array
+	$property-values: zip($property-values);
+	
+	// reading all elements inside the array with values
+	@for $i from 1 through length($property-values){
+		
+		$size: nth($property-values, $i);
+		$size: nth($size, 1);
+		
+		// checking if the unit is px
+		@if unit($size) == "px"{
+			$size: strip-units($size);
+			$px: $px + ' ' + $size + px;
+			$rem: $rem + ' ' + ($size/$base-font-size) + rem;
+		}
+		
+		// checking if the unit is rem
+		@else if unit($size) == "rem"{
+			$size: strip-units($size);
+			$px: $px + ' ' + ($size * $base-font-size) + px;
+			$rem: $rem + ' ' + $size + rem;
+		}
+	}
+
+	// fallback for old browsers that read only px
+	#{$property}: unquote($px);
+	
+	// new browsers rem
+	#{$property}: unquote($rem);
+}
+
