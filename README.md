@@ -33,6 +33,10 @@ The css output will be:
 	font-size: 16px;
 	font-size: 1rem;
 
+Is it possible to add multiple values as well:
+	
+	@include make-property(margin, 10px 15px);
+
 You can also change the global variable `$base-font-size` as default it is set `16`.
 
 ### Credits
