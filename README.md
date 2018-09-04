@@ -39,8 +39,3 @@ Is it possible to add multiple values as well:
 
 You can also change the global variable `$base-font-size` as default it is set `16`.
 
-### Credits
-
-- twitter: www.twitter.com/rickerlr
-- website: www.riccardoguglielmino.com
-- dribbble: www.dribbble.com/rickerlr
